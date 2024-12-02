@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getSheetData } from "@/lib/GoogleSheetsUtil";
 import Pusher from 'pusher-js';
 import NavBar from "@/components/NavBar";
+import Background from "@/components/Background";
+import Footer from "@/components/Footer";
 
 export default function ConferenceRegistration() {
   const [participantID, setParticipantID] = useState("ICITR2024001");
@@ -103,7 +105,8 @@ export default function ConferenceRegistration() {
 
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#E6EDF9]">
+    <div className="min-h-screen flex flex-col">
+      <Background />
       <NavBar setClientID={setClientID} />
       <main className="flex-1 container max-w-7xl mx-auto py-8 px-4">
         <div className="grid md:grid-cols-[1fr,1fr] gap-8 items-start">
@@ -277,12 +280,7 @@ export default function ConferenceRegistration() {
           </Card>
         </div>
       </main>
-
-      <footer className="w-full bg-[#1a237e] text-white py-4 px-6 mt-8">
-        <div className="max-w-7xl mx-auto text-center text-sm">
-          © 2024 Information Technology Research Unit. Faculty of Information Technology University of Moratuwa.
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

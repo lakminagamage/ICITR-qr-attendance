@@ -1,20 +1,24 @@
-
+import React from 'react';
 import Image from "next/image";
 
 export default function NavBar({ setClientID }) {
   return (
-    <header className="w-full bg-white py-4 px-6 shadow-sm">
-      <div className="max-w-7xl mx-auto flex items-center gap-4">
-        <Image
-          src="/logo.png"
-          alt="ICITR 2024 Logo"
-          width={80}
-          height={80}
-          className="object-contain"
-        />
-        <h1 className="text-2xl md:text-3xl font-medium text-black">
-          International Conference on Information Technology Research - 2024
-        </h1>
+    <nav className="fixed pt-5 pb-5 inset-x-0 top-0 z-50 bg-blue-100 bg-opacity-80 backdrop-filter backdrop-blur-sm shadow-md shadow-blur-xl shadow-gray-300">
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="flex items-start absolute left-0 pl-10">
+          <Image
+            src="/logo.png"
+            alt="ICITR 2024 Logo"
+            width={80}
+            height={80}
+            className="w-20 h-12 object-contain"
+          />
+        </div>
+        <div className="text-right w-full">
+          <h1 className="text-xl font-bold text-gray-950 right-0">
+            International Conference on Information Technology Research - 2024
+          </h1>
+        </div>
         <select
           className="ml-auto border border-white rounded-md p-2 text-white hover:text-black hover:border-gray-300"
           onChange={(e) => setClientID(e.target.value)}
@@ -24,6 +28,6 @@ export default function NavBar({ setClientID }) {
           <option value="66d71bd5-9adc-4c53-bc84-0527caf29dfb">Client 3</option>
         </select>
       </div>
-    </header>
+    </nav>
   );
 }
