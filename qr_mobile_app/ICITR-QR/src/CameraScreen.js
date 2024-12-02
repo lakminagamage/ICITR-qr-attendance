@@ -29,7 +29,7 @@ export default function CameraScreen() {
     console.log('Scanned Data:', data);
   
     // Regular expression to match ICTIR20141 followed by any three digits
-    const regex = /^ICTIR20141\d{3}$/;
+    const regex = /^ICTIR20241\d{3}$/;
   
     if (regex.test(data) && data.length === 13) {
        ToastAndroid.show('Valid Index Number', ToastAndroid.SHORT);
