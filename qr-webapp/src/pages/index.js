@@ -8,7 +8,7 @@ import Pusher from 'pusher-js';
 
 
 export default function ConferenceRegistration() {
-  const [participantID, setParticipantID] = useState("");
+  const [participantID, setParticipantID] = useState("ICITR20241001");
   const [clientID, setClientID] = useState("5bf8fed6-8e92-4618-9bba-1603e5dc736e");
   const [formData, setFormData] = useState({});
 
@@ -47,43 +47,39 @@ export default function ConferenceRegistration() {
   }, [participantID]);
 
   useEffect(() => {
-    let channel; // Declare channel outside to ensure proper cleanup
+    let channel;
   
     const pusher = new Pusher(pusherKey, {
       cluster: pusherCluster,
     });
   
     const subscribeToChannel = () => {
-      channel = pusher.subscribe(clientID); // Subscribe to the current clientID channel
+      channel = pusher.subscribe(clientID);
       console.log(`Subscribed to channel: ${clientID}`);
   
-      // Bind to the event
       channel.bind('update-participant-id', (data) => {
         if (data.participantID) {
-          setParticipantID(data.participantID); // Update participantID
+          setParticipantID(data.participantID);
         }
       });
 
-      // reset data
       setParticipantID("")
       setFormData({})
     };
   
-    // Subscribe to the channel
     subscribeToChannel();
   
-    // Cleanup on unmount or when clientID changes
     return () => {
       if (channel) {
         console.log(`Unsubscribing from channel: ${clientID}`);
-        channel.unbind_all(); // Unbind all events
-        channel.unsubscribe(); // Unsubscribe from channel
+        channel.unbind_all(); 
+        channel.unsubscribe(); 
       }
     };
-  }, [clientID]); // Dependency on clientID to resubscribe when it changes
+  }, [clientID]); 
   
   useEffect(() => {
-    setFormData({}); // Reset formData whenever clientID changes
+    setFormData({}); 
   }, [clientID]);
   
   return (
@@ -114,8 +110,8 @@ export default function ConferenceRegistration() {
       <main className="flex-1 container max-w-7xl mx-auto py-8 px-4">
         <div className="grid md:grid-cols-[1fr,1fr] gap-8 items-start">
           <div className="w-full max-w-md mx-auto">
-            <Card>
-              <CardContent className="p-4">
+            <Card className="w-full">
+              <CardContent className="p-4 ">
                 <Image
                   src="/user.jpg"
                   alt="Profile Picture Upload Area"
@@ -127,7 +123,7 @@ export default function ConferenceRegistration() {
             </Card>
           </div>
 
-          <Card className="w-full">
+          <Card className="w-[1000px]">
             <CardHeader>
               <CardTitle>Author Details</CardTitle>
               <p className="text-sm text-muted-foreground">
@@ -137,49 +133,50 @@ export default function ConferenceRegistration() {
             <CardContent>
               <form className="space-y-6">
                 <div className="space-y-4">
-                  <div className="grid gap-2">
-                    <Label htmlFor="firstName">First Name</Label>
-                    <Input
-                      id="firstName"
-                      placeholder="John Doe"
-                      value={formData.firstname || ""}
-                      onChange={(e) =>
-                        setFormData({ ...formData, firstname: e.target.value })
-                      }
-                    />
-                  </div>
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="grid gap-2">
+                      <Label htmlFor="firstName">Name</Label>
+                      <Input
+                        id="firstName"
+                        value={formData.Title + " " + formData.Name_With_Initials || ""}
+                        onChange={(e) =>
+                          setFormData({ ...formData, firstname: e.target.value })
+                        }
+                      />
+                    </div>
 
-                  <div className="grid gap-2">
-                    <Label htmlFor="lastName">Last Name</Label>
-                    <Input
-                      id="lastName"
-                      placeholder="Doe"
-                      value={formData.lastname || ""}
-                      onChange={(e) =>
-                        setFormData({ ...formData, lastname: e.target.value })
-                      }
-                    />
-                  </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="lastName">Contact Number</Label>
+                      <Input
+                        id="lastName"
+                        placeholder="person@mail.com"
+                        value={formData.Email || ""}
+                        onChange={(e) =>
+                          setFormData({ ...formData, lastname: e.target.value })
+                        }
+                      />
+                    </div>
 
-                  <div className="grid gap-2">
-                    <Label htmlFor="email">Email Address</Label>
+                    <div className="grid gap-2">
+                    <Label htmlFor="email">Contact</Label>
                     <Input
-                      id="email"
-                      type="email"
-                      placeholder="john.doe@example.com"
-                      value={formData.email || ""}
+                      id="contact"
+                      type="contact"
+                      placeholder="070 1234567"
+                      value={formData.Contact_Number || ""}
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
                     />
                   </div>
+                  </div>
 
                   <div className="grid gap-2">
-                    <Label htmlFor="address">Address</Label>
+                    <Label htmlFor="address">University/Institution</Label>
                     <Input
                       id="address"
                       placeholder="Add Address"
-                      value={formData.address || ""}
+                      value={formData.University || ""}
                       onChange={(e) =>
                         setFormData({ ...formData, address: e.target.value })
                       }
@@ -188,40 +185,93 @@ export default function ConferenceRegistration() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="grid gap-2">
-                      <Label htmlFor="age">Age</Label>
+                      <Label htmlFor="age">Locality</Label>
                       <Input
                         id="age"
-                        placeholder="34"
-                        value={formData.age || ""}
+                        placeholder="Sri Lankan"
+                        value={formData.Locality || ""}
                         onChange={(e) =>
-                          setFormData({ ...formData, age: e.target.value })
+                          setFormData({ ...formData, Locality: e.target.value })
                         }
                       />
                     </div>
                     <div className="grid gap-2">
-                      <Label htmlFor="gender">Sex</Label>
+                      <Label htmlFor="gender">Registration Type</Label>
                       <Input
                         id="gender"
-                        placeholder="Male"
-                        value={formData.gender || ""}
+                        placeholder="Student/Non-Student"
+                        value={formData.Registration_Type || ""}
                         onChange={(e) =>
-                          setFormData({ ...formData, gender: e.target.value })
+                          setFormData({ ...formData,   Registration_Type: e.target.value })
                         }
                       />
                     </div>
                   </div>
 
                   <div className="grid gap-2">
-                    <Label htmlFor="nic">NIC Number</Label>
+                    <Label htmlFor="nic">Paper Title</Label>
                     <Input
                       id="nic"
                       placeholder="Add NIC"
-                      value={formData.nic || ""}
+                      value={formData.Paper_Title || ""}
                       onChange={(e) =>
-                        setFormData({ ...formData, nic: e.target.value })
+                        setFormData({ ...formData, Paper_Title: e.target.value })
                       }
                     />
                   </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="grid gap-2">
+                      <Label htmlFor="nic">Corresponding Author</Label>
+                      <Input
+                        id="nic"
+                        placeholder="Corresponding Author"
+                        value={formData.Corresponding_Author || ""}
+                        onChange={(e) =>
+                          setFormData({ ...formData, Corresponding_Author: e.target.value })
+                        }
+                      />
+                    </div>
+
+                    <div className="grid gap-2">
+                      <Label htmlFor="nic">Presenting Author</Label>
+                      <Input
+                        id="nic"
+                        placeholder="Presenting Author"
+                        value={formData.Presenting_Author_Name || ""}
+                        onChange={(e) =>
+                          setFormData({ ...formData, Presenting_Author_Name: e.target.value })
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid gap-2">
+                      <Label htmlFor="nic">Co-Authors</Label>
+                      <Input
+                        id="nic"
+                        placeholder="Co-Authors"
+                        value={formData.Co_Author_Names || ""}
+                        onChange={(e) =>
+                          setFormData({ ...formData, Co_Author_Names: e.target.value })
+                        }
+                      />
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="grid gap-2">
+                        <Label htmlFor="nic">IEEE Membership Status</Label>
+                        <Input
+                          id="nic"
+                          placeholder="Yes/No"
+                          value={formData.IEEE_Membership || ""}
+                          onChange={(e) =>
+                            setFormData({ ...formData, IEEE_Membership: e.target.value })
+                          }
+                        />
+                      </div>
+
+                    </div>
+
+
                 </div>
               </form>
             </CardContent>
