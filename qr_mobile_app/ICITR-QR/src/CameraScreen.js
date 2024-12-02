@@ -29,7 +29,7 @@ export default function CameraScreen() {
     console.log('Scanned Data:', data);
   
     // Regular expression to match ICTIR20141 followed by any three digits
-    const regex = /^ICTIR20241\d{3}$/;
+    const regex = /^ICTIR2024\d{3}$/;
   
     if (regex.test(data) && data.length === 13) {
         console.log('Valid QR Code');
