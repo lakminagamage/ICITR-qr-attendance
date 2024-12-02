@@ -13,6 +13,7 @@ const AuthorDetail = () => {
   //   "984536920V" // NIC Number
   // ];
   const [authorData, setAuthorData] = useState([]);
+  const [imageSrc, setImageSrc] = useState('');
 
   useEffect(() => {
     const socket = new WebSocket('ws://your-websocket-url');
@@ -25,6 +26,7 @@ const AuthorDetail = () => {
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
       setAuthorData(data);
+      setImageSrc(data.imageSrc);
     };
 
     socket.onclose = () => {
@@ -45,9 +47,10 @@ const AuthorDetail = () => {
       <div className="grid md:grid-cols-2 gap-8 mt-16">
         <div className="flex justify-center items-center relative">
           <img
-            src="./women.jpg"
+            src={imageSrc || './i.png'} // Use dynamic image source or fallback to default
             alt="Author"
-            className="rounded-md shadow-lg w-80 h-96 object-cover"
+            className="rounded-md shadow-lg object-cover"
+            style={{ opacity: imageSrc ? 1 : 0.5, width: imageSrc ? 'auto' : '60%', height: imageSrc ? 'auto' : '60%' }} // Reduce opacity and size for default image
           />
           <div className="absolute right-0 top-0 h-full border-r-2 border-gray-300"></div>
         </div>
