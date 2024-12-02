@@ -14,7 +14,7 @@ const HomeScreen = () => {
       <Text style={styles.title}>Welcome to the QR Scanner</Text>
       <Image source={require('../assets/logo.png')} style={styles.logo} />
 
-   
+      <Text style={styles.title1}>Select a client</Text>
 
       <View style={styles.pickerContainer}>
         <Picker
@@ -44,16 +44,23 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    color: '#fff',
   },
   logo: {
-    width: 100,
-    height: 200,
+
     marginBottom: 50,
+    borderRadius: 50,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 40,
+    textAlign: 'center',
+  },
+  title1: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 10,
     textAlign: 'center',
   },
   pickerContainer: {
