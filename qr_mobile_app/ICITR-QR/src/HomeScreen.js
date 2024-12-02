@@ -5,7 +5,7 @@ import { Picker } from '@react-native-picker/picker';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [selectedClient, setSelectedClient] = useState("");
+  const [selectedClient, setSelectedClient] = useState('5bf8fed6-8e92-4618-9bba-1603e5dc736e');
 
   return (
     
@@ -32,7 +32,7 @@ const HomeScreen = () => {
       
       <Button
         title="Scan QR Code"
-        onPress={() => navigation.navigate('Camera',{ selectedClient})}
+        onPress={() => navigation.navigate('Camera',{clientID: selectedClient})}
       />
     </View>
   );
