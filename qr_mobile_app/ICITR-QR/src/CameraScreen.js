@@ -32,10 +32,12 @@ export default function CameraScreen() {
     const regex = /^ICTIR20241\d{3}$/;
   
     if (regex.test(data) && data.length === 13) {
-       ToastAndroid.show('Valid Index Number', ToastAndroid.SHORT);
+        console.log('Valid QR Code');
+       ToastAndroid.show('Valid QR code', ToastAndroid.SHORT);
      
     } else {
-      ToastAndroid.show('Invalid Index Number', ToastAndroid.SHORT);
+        console.log('Invalid QR Code');
+      ToastAndroid.show('Invalid QR code', ToastAndroid.SHORT);
     }
   };
 
@@ -47,9 +49,7 @@ return (
             barcodeScannerSettings={{
                     barcodeTypes: ["qr"],
                 }}
-            onBarcodeScanned={({ data }) => {
-                console.log(data);
-            }}
+            onBarcodeScanned={handleBarCodeScanned}
         />
     </View>
 );
