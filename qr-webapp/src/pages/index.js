@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getSheetData } from "@/lib/GoogleSheetsUtil";
 import Pusher from 'pusher-js';
-
+import NavBar from "@/components/NavBar";
 
 export default function ConferenceRegistration() {
   const [participantID, setParticipantID] = useState("ICITR2024001");
@@ -104,29 +104,7 @@ export default function ConferenceRegistration() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#E6EDF9]">
-      <header className="w-full bg-white py-4 px-6 shadow-sm">
-        <div className="max-w-7xl mx-auto flex items-center gap-4">
-          <Image
-            src="/logo.png"
-            alt="ICITR 2024 Logo"
-            width={80}
-            height={80}
-            className="object-contain"
-          />
-          <h1 className="text-2xl md:text-3xl font-medium text-black">
-            International Conference on Information Technology Research - 2024
-          </h1>
-            <select
-            className="ml-auto border border-white rounded-md p-2 text-white hover:text-black hover:border-gray-300"
-            onChange={(e) => setClientID(e.target.value)}
-            >
-            <option value="5bf8fed6-8e92-4618-9bba-1603e5dc736e">Client 1</option>
-            <option value="7ddf697b-732a-4a25-b74f-a4d5f482ef10">Client 2</option>
-            <option value="66d71bd5-9adc-4c53-bc84-0527caf29dfb">Client 3</option>
-            </select>
-        </div>
-      </header>
-
+      <NavBar setClientID={setClientID} />
       <main className="flex-1 container max-w-7xl mx-auto py-8 px-4">
         <div className="grid md:grid-cols-[1fr,1fr] gap-8 items-start">
           <div className="w-full max-w-md mx-auto">
