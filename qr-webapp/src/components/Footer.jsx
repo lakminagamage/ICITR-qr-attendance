@@ -1,10 +1,16 @@
+import React, { useEffect } from 'react';
 
 export default function Footer() {
+  useEffect(() => {
+    // Add margin-bottom to the body content
+    document.body.style.marginBottom = "2rem";
+  }, []);
+
   return (
-    <footer className="w-full bg-[#1a237e] text-white py-4 px-6 mt-8 fixed ">
-      <div className="max-w-7xl mx-auto text-center text-sm">
-        © 2024 Information Technology Research Unit. Faculty of Information Technology University of Moratuwa.
-      </div>
+    <footer className="bg-blue-900 text-white text-center py-4 fixed bottom-0 w-full">
+      <p className="text-sm">
+        &copy; 2024 Information Technology Research Unit, Faculty of Information Technology, University of Moratuwa.
+      </p>
     </footer>
   );
 }

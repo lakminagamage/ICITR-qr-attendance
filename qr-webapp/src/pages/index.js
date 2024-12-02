@@ -108,11 +108,11 @@ export default function ConferenceRegistration() {
     <div className="min-h-screen flex flex-col">
       <Background />
       <NavBar setClientID={setClientID} />
-      <main className="flex-1 container max-w-7xl mx-auto py-8 px-4">
+      <main className="mt-12 flex-1 container max-w-7xl mx-auto py-8 px-4">
         <div className="grid md:grid-cols-[1fr,1fr] gap-8 items-start">
           <div className="w-full max-w-md mx-auto">
             <Card className="w-full">
-              <CardContent className="p-4 ">
+              <CardContent className="p-3">
                 <Image
                   src={profilePictureUrl}
                   alt="Profile Picture Upload Area"
@@ -124,7 +124,7 @@ export default function ConferenceRegistration() {
             </Card>
           </div>
 
-          <Card className="w-[1000px]">
+          <Card className="w-[1000px] bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border border-gray-200 rounded-lg shadow-lg">
             <CardHeader>
               <CardTitle>Author Details</CardTitle>
               <p className="text-sm text-muted-foreground">
