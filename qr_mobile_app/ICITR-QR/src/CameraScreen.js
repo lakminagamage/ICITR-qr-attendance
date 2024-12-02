@@ -31,8 +31,8 @@ export default function CameraScreen() {
     // Regular expression to match ICTIR20141 followed by any three digits
     const regex = /^ICTIR2024\d{3}$/;
   
-    if (regex.test(data) && data.length === 13) {
-        console.log('Valid QR Code');
+    if (regex.test(data) && data.length === 12) {
+      console.log('Valid QR Code');
        ToastAndroid.show('Valid QR code', ToastAndroid.SHORT);
      
     } else {
