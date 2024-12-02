@@ -12,7 +12,7 @@ const HomeScreen = () => {
     
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to the QR Scanner</Text>
-      <Image source={require('../assets/logo.png')} />
+      <Image source={require('../assets/logo.png')} style={styles.logo} />
 
    
 
@@ -44,6 +44,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  logo: {
+    width: 100,
+    height: 200,
+    marginBottom: 50,
   },
   title: {
     fontSize: 24,
