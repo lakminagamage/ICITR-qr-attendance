@@ -1,6 +1,6 @@
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Button, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native';
 
 export default function CameraScreen() {
   const [facing, setFacing] = useState('back');
@@ -24,6 +24,20 @@ export default function CameraScreen() {
   function toggleCameraFacing() {
     setFacing(current => (current === 'back' ? 'front' : 'back'));
   }
+
+  const handleBarCodeScanned = ({ data }) => {
+    console.log('Scanned Data:', data);
+  
+    // Regular expression to match ICTIR20141 followed by any three digits
+    const regex = /^ICTIR20141\d{3}$/;
+  
+    if (regex.test(data) && data.length === 13) {
+       ToastAndroid.show('Valid Index Number', ToastAndroid.SHORT);
+     
+    } else {
+      ToastAndroid.show('Invalid Index Number', ToastAndroid.SHORT);
+    }
+  };
 
 return (
     <View style={styles.container}>
