@@ -1,92 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, ToastAndroid } from 'react-native';
-import { Camera } from 'expo-camera';
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
+import { useState } from 'react';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-const CameraScreen = () => {
-  const navigation = useNavigation();
-  const [hasPermission, setHasPermission] = useState(null);
-  const [isScanned, setIsScanned] = useState(false);
-  const [cameraReady, setCameraReady] = useState(false);
+export default function CameraScreen() {
+  const [facing, setFacing] = useState('back');
+  const [permission, requestPermission] = useCameraPermissions();
 
-  useFocusEffect(
-    React.useCallback(() => {
-      console.log('Camera Screen Mounted');
-      setCameraReady(true);
-      (async () => {
-        const { status } = await Camera.requestCameraPermissionsAsync();
-        setHasPermission(status === 'granted');
-      })();
-
-      return () => {
-        console.log('Camera Screen Unmounted');
-        setCameraReady(false);
-      };
-    }, [])
-  );
-
-  useEffect(() => {
-    if (hasPermission === true) {
-      console.log('Camera permission:', hasPermission);
-    } else if (hasPermission === false) {
-      ToastAndroid.show('Camera permission denied', ToastAndroid.LONG);
-    }
-  }, [hasPermission]);
-
-  if (hasPermission === null) {
+  if (!permission) {
+    // Camera permissions are still loading.
     return <View />;
   }
 
-  return (
-    <ScrollView
-      contentContainerStyle={styles.container}
-    >
-      <View style={styles.innerContainer}>
-        <Text style={styles.text}>Scan the QR code on your student ID</Text>
-        <View style={styles.cameraContainer}>
-          {cameraReady && (
-            <Camera
-              style={styles.camera}
-              type={Camera.Constants.Type.back}
-              onBarCodeScanned={() => {}}
-            />
-          )}
-        </View>
+  if (!permission.granted) {
+    // Camera permissions are not granted yet.
+    return (
+      <View style={styles.container}>
+        <Text style={styles.message}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="grant permission" />
       </View>
-    </ScrollView>
-  );
-};
+    );
+  }
+
+  function toggleCameraFacing() {
+    setFacing(current => (current === 'back' ? 'front' : 'back'));
+  }
+
+return (
+    <View style={styles.container}>
+        <CameraView
+            style={styles.camera}
+            facing={facing}
+            barcodeScannerSettings={{
+                    barcodeTypes: ["qr"],
+                }}
+            onBarcodeScanned={({ data }) => {
+                console.log(data);
+            }}
+        />
+    </View>
+);
+}
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-  },
-  innerContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 20,
   },
-  text: {
-    color: 'blue',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
-  cameraContainer: {
-    width: 256,
-    height: 256,
-    borderRadius: 16,
-    overflow: 'hidden',
+  message: {
+    textAlign: 'center',
+    paddingBottom: 10,
   },
   camera: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    margin: 64,
+  },
+  button: {
+    flex: 1,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
   },
 });
-
-export default CameraScreen;
