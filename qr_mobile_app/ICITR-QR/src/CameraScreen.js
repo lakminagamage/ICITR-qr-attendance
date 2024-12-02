@@ -10,7 +10,7 @@ export default function CameraScreen() {
   const [facing, setFacing] = useState('back');
   const [permission, requestPermission] = useCameraPermissions();
   const { clientID } = route.params;
-  const BASE_URL = 'http://Localhost:3000/api/clients/';
+  const BASE_URL = 'https://icitr-qr.vercel.app';
 
   if (!permission) {
     // Camera permissions are still loading.
@@ -35,10 +35,12 @@ export default function CameraScreen() {
     console.log('Scanned Data:', data);
   
     // Regular expression to match ICTIR20141 followed by any three digits
-    const regex = /^ICTIR2024\d{3}$/;
+    const regex = /^ICITR2024\d{3}$/;
     
     if (regex.test(data) && data.length === 12) {
       console.log('Valid QR Code');
+  
+      console.log('Client ID:', clientID);
       ToastAndroid.show('Valid QR code', ToastAndroid.SHORT);
       try {
         axios.post(`${BASE_URL}/api/scan`, { 
@@ -47,7 +49,7 @@ export default function CameraScreen() {
        })
         .then((response) => {
           console.log(response.data);
-          navigation.navigate('Success', { data: response.data });
+          navigation.navigate('ICITR_2024');
         }
         )
         .catch((error) => {
