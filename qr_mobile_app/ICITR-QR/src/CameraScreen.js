@@ -1,76 +1,91 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ToastAndroid } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, ToastAndroid } from 'react-native';
 import { Camera } from 'expo-camera';
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 const CameraScreen = () => {
+  const navigation = useNavigation();
   const [hasPermission, setHasPermission] = useState(null);
   const [isScanned, setIsScanned] = useState(false);
+  const [cameraReady, setCameraReady] = useState(false);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log('Camera Screen Mounted');
+      setCameraReady(true);
+      (async () => {
+        const { status } = await Camera.requestCameraPermissionsAsync();
+        setHasPermission(status === 'granted');
+      })();
+
+      return () => {
+        console.log('Camera Screen Unmounted');
+        setCameraReady(false);
+      };
+    }, [])
+  );
 
   useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
-
-  const handleBarCodeScanned = ({ data }) => {
-    setIsScanned(true);
-    console.log('Scanned Data:', data);
-
-    // Generate a string based on the scanned data
-    const generatedString = `Generated: ${data}`;
-    console.log('Generated String:', generatedString);
-
-    // Show a toast message
-    ToastAndroid.show(`Scanned: ${data}`, ToastAndroid.SHORT);
-
-    // Reset scanning after a short delay
-    setTimeout(() => setIsScanned(false), 2000);
-  };
+    if (hasPermission === true) {
+      console.log('Camera permission:', hasPermission);
+    } else if (hasPermission === false) {
+      ToastAndroid.show('Camera permission denied', ToastAndroid.LONG);
+    }
+  }, [hasPermission]);
 
   if (hasPermission === null) {
-    return <Text>Requesting camera permissions...</Text>;
-  }
-
-  if (hasPermission === false) {
-    return <Text>No access to camera. Please enable camera permissions in settings.</Text>;
+    return <View />;
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Scan the QR Code</Text>
-      <View style={styles.cameraContainer}>
-        <Camera
-          style={styles.camera}
-          type={Camera.Constants.Type.back}
-          onBarCodeScanned={isScanned ? undefined : handleBarCodeScanned}
-        />
+    <ScrollView
+      contentContainerStyle={styles.container}
+    >
+      <View style={styles.innerContainer}>
+        <Text style={styles.text}>Scan the QR code on your student ID</Text>
+        <View style={styles.cameraContainer}>
+          {cameraReady && (
+            <Camera
+              style={styles.camera}
+              type={Camera.Constants.Type.back}
+              onBarCodeScanned={() => {}}
+            />
+          )}
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+  },
+  innerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-    padding: 20,
+    paddingBottom: 20,
   },
-  header: {
+  text: {
+    color: 'blue',
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 16,
   },
   cameraContainer: {
-    width: 300,
-    height: 300,
-    borderRadius: 10,
+    width: 256,
+    height: 256,
+    borderRadius: 16,
     overflow: 'hidden',
   },
   camera: {
-    flex: 1,
+    width: '100%',
+    height: '100%',
   },
 });
 
