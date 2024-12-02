@@ -8,7 +8,7 @@ import Pusher from 'pusher-js';
 
 
 export default function ConferenceRegistration() {
-  const [participantID, setParticipantID] = useState("ICITR20241012");
+  const [participantID, setParticipantID] = useState("ICITR2024001");
   const [clientID, setClientID] = useState("5bf8fed6-8e92-4618-9bba-1603e5dc736e");
   const [formData, setFormData] = useState({});
 
@@ -159,6 +159,7 @@ export default function ConferenceRegistration() {
                       <Input
                         id="firstName"
                         value={formData.Title + " " + formData.Name_With_Initials || ""}
+                        placeholder="Name"
                         onChange={(e) =>
                           setFormData({ ...formData, firstname: e.target.value })
                         }
