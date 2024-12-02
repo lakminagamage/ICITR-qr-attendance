@@ -8,7 +8,7 @@ import Pusher from 'pusher-js';
 
 
 export default function ConferenceRegistration() {
-  const [participantID, setParticipantID] = useState("ICITR20241001");
+  const [participantID, setParticipantID] = useState("ICITR20241012");
   const [clientID, setClientID] = useState("5bf8fed6-8e92-4618-9bba-1603e5dc736e");
   const [formData, setFormData] = useState({});
 
@@ -81,13 +81,33 @@ export default function ConferenceRegistration() {
   useEffect(() => {
     setFormData({}); 
   }, [clientID]);
+
+
+  function transformGoogleDriveLink(originalLink) {
+    if (typeof originalLink !== "string" || !originalLink.includes("id=")) {
+      console.error("Invalid link format:", originalLink);
+      return null;
+    }
   
+    const match = originalLink.match(/id=([\w-]+)/);
+    if (match && match[1]) {
+      const fileId = match[1];
+      return `https://drive.usercontent.google.com/download?id=${fileId}&export=view`;
+    }
+  
+    console.error("Unable to extract file ID from link:", originalLink);
+    return null;
+  }
+  
+  const profilePictureUrl = transformGoogleDriveLink(formData.Photo);
+
+
   return (
     <div className="min-h-screen flex flex-col bg-[#E6EDF9]">
       <header className="w-full bg-white py-4 px-6 shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center gap-4">
           <Image
-            src="/window.svg"
+            src="/logo.png"
             alt="ICITR 2024 Logo"
             width={80}
             height={80}
@@ -113,7 +133,7 @@ export default function ConferenceRegistration() {
             <Card className="w-full">
               <CardContent className="p-4 ">
                 <Image
-                  src="/user.jpg"
+                  src={profilePictureUrl}
                   alt="Profile Picture Upload Area"
                   width={700}
                   height={800}
