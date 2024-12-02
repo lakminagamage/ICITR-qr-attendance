@@ -2,6 +2,7 @@ import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { useState } from 'react';
 import { useNavigation,useRoute,useFocusEffect } from '@react-navigation/native';
 import { Button, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native';
+import axios from 'axios';
 
 export default function CameraScreen() {
   const navigation = useNavigation();
@@ -9,6 +10,7 @@ export default function CameraScreen() {
   const [facing, setFacing] = useState('back');
   const [permission, requestPermission] = useCameraPermissions();
   const { clientID } = route.params;
+  const BASE_URL = 'http://Localhost:3000/api/clients/';
 
   if (!permission) {
     // Camera permissions are still loading.
@@ -34,10 +36,29 @@ export default function CameraScreen() {
   
     // Regular expression to match ICTIR20141 followed by any three digits
     const regex = /^ICTIR2024\d{3}$/;
-  
+    
     if (regex.test(data) && data.length === 12) {
       console.log('Valid QR Code');
-       ToastAndroid.show('Valid QR code', ToastAndroid.SHORT);
+      ToastAndroid.show('Valid QR code', ToastAndroid.SHORT);
+      try {
+        axios.post(`${BASE_URL}/api/scan`, { 
+          participantID: data,
+          clientID: clientID
+       })
+        .then((response) => {
+          console.log(response.data);
+          navigation.navigate('Success', { data: response.data });
+        }
+        )
+        .catch((error) => {
+          console.log(error);
+        }
+        );
+      }
+      catch (error) {
+        console.log(error);
+      }
+   
      
     } else {
         console.log('Invalid QR Code');
