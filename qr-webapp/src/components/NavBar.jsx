@@ -20,7 +20,7 @@ export default function NavBar({ setClientID }) {
           </h1>
         </div>
         <select
-          className="ml-auto border border-white rounded-md p-2 text-white hover:text-black hover:border-gray-300"
+          className="ms-6 ml-auto border border-blue-500 rounded-md p-2 text-gray-800 hover:text-black hover:border-gray-300"
           onChange={(e) => setClientID(e.target.value)}
         >
           <option value="5bf8fed6-8e92-4618-9bba-1603e5dc736e">Client 1</option>

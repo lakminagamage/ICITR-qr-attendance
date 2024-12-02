@@ -1,6 +1,12 @@
+import React from 'react';
 
-export default function Background() {
+const Background = ({ children }) => {
   return (
-    <div className="absolute inset-0 bg-[#E6EDF9] z-[-1]"></div>
+    <div className="bg-white relative min-h-screen bg-gradient-to-b from-white to-gray-100" style={{ backgroundImage: 'url(./hero_back.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      {children}
+      <img src="./ITRU_Logo.png" alt="Icon" className="absolute bottom-11 left-0 m-4 h-14 w-20" />
+    </div>
   );
-}
+};
+
+export default Background;
