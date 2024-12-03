@@ -139,7 +139,7 @@ export default function ConferenceRegistration() {
                         <Input
                           id="firstName"
                           value={formData.Title + " " + formData.Name_With_Initials || ""}
-                          placeholder="Name"
+                          placeholder="Your Name"
                           onChange={(e) =>
                             setFormData({ ...formData, firstname: e.target.value })
                           }
