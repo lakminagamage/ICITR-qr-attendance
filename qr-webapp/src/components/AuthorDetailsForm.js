@@ -24,25 +24,25 @@ export default function AuthorDetailsForm({ formData }) {
                 {formData.University || ""}
               </dd>
             </div>
-            <div className="bg-white px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+            <div className="bg-gray-50 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
               <dt className="text-sm leading-6 text-gray-900">Email Address</dt>
               <dd className="mt-1 text-sm font-normal leading-6 text-gray-950 sm:col-span-2 sm:mt-0">
                 {formData.Email || ""}
               </dd>
             </div>
-            <div className="bg-gray-50 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+            <div className="bg-white px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
               <dt className="text-sm leading-6 text-gray-900">Locality</dt>
               <dd className="mt-1 text-sm font-normal leading-6 text-gray-950 sm:col-span-2 sm:mt-0">
                 {formData.Locality || ""}
               </dd>
             </div>
-            <div className="bg-white px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+            <div className="bg-gray-50 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
               <dt className="text-sm leading-6 text-gray-900">Registration Type</dt>
               <dd className="mt-1 text-sm font-normal leading-6 text-gray-950 sm:col-span-2 sm:mt-0">
                 {formData.Registration_Type || ""}
               </dd>
             </div>
-            <div className="bg-gray-50 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
+            <div className="bg-white px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
               <dt className="text-sm leading-6 text-gray-900">Paper Title</dt>
               <dd className="mt-1 text-md font-semibold leading-6 text-gray-950 sm:col-span-2 sm:mt-0">
                 {formData.Paper_Title || ""}
