@@ -5,8 +5,7 @@ import { Picker } from '@react-native-picker/picker';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const clientID='client1';
-  const [selectedClient, setSelectedClient] = useState('client1');
+  const [selectedClient, setSelectedClient] = useState('5bf8fed6-8e92-4618-9bba-1603e5dc736e');
 
   return (
     
@@ -14,7 +13,7 @@ const HomeScreen = () => {
       <Text style={styles.title}>Welcome to the QR Scanner</Text>
       <Image source={require('../assets/logo.png')} style={styles.logo} />
 
-   
+      <Text style={styles.title1}>Select a client</Text>
 
       <View style={styles.pickerContainer}>
         <Picker
@@ -22,9 +21,9 @@ const HomeScreen = () => {
           style={styles.picker}
           onValueChange={(itemValue) => setSelectedClient(itemValue)}
         >
-          <Picker.Item label="Client 1" value="client1" />
-          <Picker.Item label="Client 2" value="client2" />
-          <Picker.Item label="Client 3" value="client3" />
+          <Picker.Item label="Client 1" value="5bf8fed6-8e92-4618-9bba-1603e5dc736e" />
+          <Picker.Item label="Client 2" value="7ddf697b-732a-4a25-b74f-a4d5f482ef10" />
+          <Picker.Item label="Client 3" value="66d71bd5-9adc-4c53-bc84-0527caf29dfb" />
         </Picker>
       </View>
 
@@ -33,7 +32,7 @@ const HomeScreen = () => {
       
       <Button
         title="Scan QR Code"
-        onPress={() => navigation.navigate('Camera',{ clientID})}
+        onPress={() => navigation.navigate('Camera',{clientID: selectedClient})}
       />
     </View>
   );
@@ -44,16 +43,23 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    color: '#fff',
   },
   logo: {
-    width: 100,
-    height: 200,
+
     marginBottom: 50,
+    borderRadius: 50,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 40,
+    textAlign: 'center',
+  },
+  title1: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 10,
     textAlign: 'center',
   },
   pickerContainer: {
