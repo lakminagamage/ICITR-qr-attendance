@@ -9,13 +9,13 @@ export default function NavBar({ setClientID }) {
           <Image
             src="/logo.png"
             alt="ICITR 2024 Logo"
-            width={80}
-            height={80}
-            className="w-24 h-12"
+            width={120}
+            height={120}
+            className="w-full h-20"
           />
         </div>
         <div className="flex items-center justify-end w-full sm:w-auto">
-          <h1 className="text-2xl font-bold text-blue-900">
+          <h1 className="text-3xl font-bold text-blue-900">
             International Conference on Information Technology Research - 2024
           </h1>
           <select

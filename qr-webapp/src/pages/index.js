@@ -122,7 +122,7 @@ export default function ConferenceRegistration() {
                 </CardContent>
               </Card>
             </div>
-            <div className="w-full lg:w-2/3">
+            <div className="w-full lg:w-2/3 py-[7%]">
               <AuthorDetailsForm formData={formData} setFormData={setFormData} />
             </div>
           </div>

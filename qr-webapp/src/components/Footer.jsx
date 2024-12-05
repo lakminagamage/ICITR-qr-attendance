@@ -8,7 +8,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-blue-900 text-white text-center py-4 fixed bottom-0 w-full">
-      <p className="text-sm">
+      <p className="text-lg">
         &copy; 2024 Information Technology Research Unit, Faculty of Information Technology, University of Moratuwa.
       </p>
     </footer>
