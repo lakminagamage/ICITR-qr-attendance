@@ -9,7 +9,7 @@ import AuthorDetailsForm from "@/components/AuthorDetailsForm";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function ConferenceRegistration() {
-  const [participantID, setParticipantID] = useState("ICITR2024001");
+  const [participantID, setParticipantID] = useState("ICITR2024069");
   const [clientID, setClientID] = useState("5bf8fed6-8e92-4618-9bba-1603e5dc736e");
   const [formData, setFormData] = useState({});
 
@@ -83,6 +83,12 @@ export default function ConferenceRegistration() {
     setFormData({}); 
   }, [clientID]);
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   function transformGoogleDriveLink(originalLink) {
     if (typeof originalLink !== "string" || !originalLink.includes("id=")) {
@@ -104,12 +110,12 @@ export default function ConferenceRegistration() {
 
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-hidden">
       <Background>
         <NavBar setClientID={setClientID} />
-        <main className="mt-12 flex-1 container max-w-full py-8 px-4 sm:px-6 lg:px-8">
+        <main className="mt-12 flex-1 container max-w-full py-8 px-4 sm:px-6 lg:px-8 p-10">
           <div className="flex flex-col lg:flex-row gap-10 items-start">
-            <div className="w-full lg:w-1/3 max-w-md flex justify-center mt-10 lg:mt-24">
+            <div className="w-full lg:w-1/5 max-w-md flex justify-center py-[16%]">
               <Card className="w-full max-w-xs">
                 <CardContent className="p-3">
                   <Image
@@ -122,7 +128,7 @@ export default function ConferenceRegistration() {
                 </CardContent>
               </Card>
             </div>
-            <div className="w-full lg:w-2/3 py-[7%]">
+            <div className="w-full lg:w-4/5 py-[10%]">
               <AuthorDetailsForm formData={formData} setFormData={setFormData} />
             </div>
 
