@@ -13,19 +13,19 @@ export default function AuthorDetailsForm({ formData }) {
         <div className="border-t border-gray-100">
           <dl className="divide-y divide-gray-100">
             <div className="bg-gray-50 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-              <dt className="text-sm leading-6 text-gray-900">Name</dt>
+              <dt className="text-sm leading-6 text-gray-900 font-semibold">Name</dt>
               <dd className="mt-1 text-md font-semibold leading-6 text-gray-950 sm:col-span-2 sm:mt-0">
                 {formData.Title + " " + formData.Name_With_Initials || ""}
               </dd>
             </div>
             <div className="bg-white px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-              <dt className="text-sm leading-6 text-gray-900">University/Institution</dt>
+              <dt className="text-sm leading-6 text-gray-900 font-semibold">University/Institution</dt>
               <dd className="mt-1 text-md font-semibold leading-6 text-gray-950 sm:col-span-2 sm:mt-0">
                 {formData.University || ""}
               </dd>
             </div>
             <div className="bg-gray-50 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-              <dt className="text-sm leading-6 text-gray-900">Paper Title</dt>
+              <dt className="text-sm leading-6 text-gray-900 font-semibold">Paper Title</dt>
               <dd className="mt-1 text-md font-semibold leading-6 text-gray-950 sm:col-span-2 sm:mt-0">
                 {formData.Paper_Title || ""}
               </dd>
@@ -55,24 +55,7 @@ export default function AuthorDetailsForm({ formData }) {
                 {formData.Contact_Number || ""}
               </dd>
             </div>
-            <div className="bg-white px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-              <dt className="text-sm leading-6 text-gray-900">Corresponding Author</dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-950 sm:col-span-2 sm:mt-0">
-                {formData.Corresponding_Author || ""}
-              </dd>
-            </div>
-            <div className="bg-gray-50 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-              <dt className="text-sm leading-6 text-gray-900">Presenting Author</dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-950 sm:col-span-2 sm:mt-0">
-                {formData.Presenting_Author_Name || ""}
-              </dd>
-            </div>
-            <div className="bg-white px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
-              <dt className="text-sm leading-6 text-gray-900">Co-Authors</dt>
-              <dd className="mt-1 text-sm leading-6 text-gray-950 sm:col-span-2 sm:mt-0">
-                {formData.Co_Author_Names || ""}
-              </dd>
-            </div>
+            
             <div className="bg-gray-50 px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-3">
               <dt className="text-sm leading-6 text-gray-900">IEEE Membership Status</dt>
               <dd className="mt-1 text-sm leading-6 text-gray-950 sm:col-span-2 sm:mt-0">
