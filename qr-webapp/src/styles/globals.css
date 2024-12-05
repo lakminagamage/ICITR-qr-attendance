@@ -84,3 +84,11 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.font-cambria {
+  font-family: 'Cambria', serif;
+}
+
+.font-monterrat {
+  font-family: 'Montserrat', sans-serif;
+}
