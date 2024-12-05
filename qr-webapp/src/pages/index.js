@@ -125,6 +125,7 @@ export default function ConferenceRegistration() {
             <div className="w-full lg:w-2/3 py-[7%]">
               <AuthorDetailsForm formData={formData} setFormData={setFormData} />
             </div>
+
           </div>
         </main>
       </Background>
