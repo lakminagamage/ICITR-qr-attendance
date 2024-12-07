@@ -1,5 +1,5 @@
 # ICITR-qr-attendance
-A QR code based attendance and details verification system for 9th International Conference on Information Technology Research
+A QR code based attendance and author details verification system for 9th International Conference on Information Technology Research
 
 # Usage
 
