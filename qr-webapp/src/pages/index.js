@@ -14,13 +14,13 @@ export default function ConferenceRegistration() {
   const [formData, setFormData] = useState({});
 
   // google keys
-  const apiKey = "AIzaSyCUs7V2XpnGPXPJ0-geJgrP8aaapGnfYKc";
-  const sheetId = "1m_6V_a1IKWf5JhpaSeWLGAwzMHUNpsH6mnX5qJSBXMs";
+  const apiKey = "";
+  const sheetId = "";
   const range = "Sheet1"; 
 
   // pusher keys
-  const pusherKey = "49aa52159c63a33968f8";
-  const pusherCluster = "ap1";
+  const pusherKey = "";
+  const pusherCluster = "";
 
   useEffect(() => {
     async function fetchData() {
